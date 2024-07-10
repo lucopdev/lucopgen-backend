@@ -1,0 +1,25 @@
+{
+  "name": "lucopgen",
+  "version": "1.0.0",
+  "main": "dist/server.js",
+  "scripts": {
+    "start": "node -r tsconfig-paths/register dist/server.js",
+    "dev": "ts-node -r tsconfig-paths/register src/server.ts",
+    "build": "tsc",
+    "test": "echo \"No tests specified\" && exit 0",
+    "migrate": "prisma migrate dev",
+    "generate": "prisma generate"
+  },
+  "dependencies": {
+    "@prisma/client": "^4.10.0",
+    "bcrypt": "^5.1.0",
+    "fastify": "^4.0.1"
+  },
+  "devDependencies": {
+    "@types/node": "^20.14.10",
+    "prisma": "^4.10.0",
+    "ts-node": "^10.9.1",
+    "tsconfig-paths": "^4.2.0",
+    "typescript": "^5.0.4"
+  }
+}
