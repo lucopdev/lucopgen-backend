@@ -8,10 +8,10 @@ const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const accountRoutes_1 = __importDefault(require("./routes/accountRoutes"));
 const app = async (fastify) => {
     fastify.register(cors_1.default, {
-        origin: '*', // Permite todas as origens. Para produção, substitua '*' por um URL específico ou uma lista de URLs permitidos.
+        origin: '*',
         methods: ['GET', 'POST', 'PUT', 'DELETE', 'OPTIONS'],
         allowedHeaders: ['Content-Type', 'Authorization'],
-        credentials: true, // Permite envio de cookies e outras credenciais
+        credentials: true,
     });
     fastify.get('/', async (request, reply) => {
         reply.send('Hello World!');

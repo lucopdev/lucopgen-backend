@@ -12,7 +12,7 @@ class AccountModel {
         return prisma_1.default.account.create({
             data: {
                 name: data.name,
-                email: data.email,
+                login: data.login,
                 password: data.password,
                 owner: {
                     connect: {

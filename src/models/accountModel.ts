@@ -5,11 +5,11 @@ class AccountModel {
     return prisma.account.findMany();
   }
 
-  async create(data: { ownerId: number; email: string; password: string; name: string }) {
+  async create(data: { ownerId: number; login: string; password: string; name: string }) {
     return prisma.account.create({
       data: {
         name: data.name,
-        email: data.email,
+        login: data.login,
         password: data.password,
         owner: {
           connect: {
@@ -18,7 +18,7 @@ class AccountModel {
         },
       },
     });
-  }
+  } 
 }
 
 export default AccountModel;

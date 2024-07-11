@@ -18,9 +18,9 @@ class AccountController {
             }
         };
         this.createAccount = async (request, response) => {
-            const { email, password, name, ownerId } = request.body;
+            const { login, password, name, ownerId } = request.body;
             try {
-                const account = await this.accountModel.create({ email, password, name, ownerId: Number(ownerId) });
+                const account = await this.accountModel.create({ login, password, name, ownerId: Number(ownerId) });
                 response.send(account);
             }
             catch (error) {

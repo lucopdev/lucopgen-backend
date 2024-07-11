@@ -3,8 +3,8 @@
   "version": "1.0.0",
   "main": "dist/server.js",
   "scripts": {
-    "start": "node -r tsconfig-paths/register dist/server.js",
-    "dev": "ts-node -r tsconfig-paths/register src/server.ts",
+    "start": "docker ps | grep -q lucopgen-mysql || docker start lucopgen-mysql && node -r tsconfig-paths/register dist/server.js",
+    "dev": "docker ps | grep -q lucopgen-mysql || docker start lucopgen-mysql && ts-node -r tsconfig-paths/register src/server.ts",
     "build": "tsc",
     "test": "echo \"No tests specified\" && exit 0",
     "migrate": "prisma migrate dev",

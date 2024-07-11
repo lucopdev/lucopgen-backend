@@ -14,10 +14,10 @@ class AccountController {
   };
 
   createAccount = async (request: FastifyRequest, response: FastifyReply) => {
-    const { email, password, name, ownerId } = request.body as { email: string; password: string; name: string, ownerId: number};
+    const { login, password, name, ownerId } = request.body as { login: string; password: string; name: string, ownerId: number};
 
     try {
-      const account = await this.accountModel.create({ email, password, name, ownerId: Number(ownerId) });
+      const account = await this.accountModel.create({ login, password, name, ownerId: Number(ownerId) });
       response.send(account);
     } catch (error) {
       response.status(500).send(error);
