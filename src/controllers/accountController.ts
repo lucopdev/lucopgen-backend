@@ -1,6 +1,13 @@
 import AccountModel from '../models/accountModel';
 import { FastifyRequest, FastifyReply } from 'fastify';
 
+interface AccountRequest {
+  login: string;
+  password: string;
+  name: string;
+  ownerId: number;
+}
+
 class AccountController {
   accountModel = new AccountModel();
 
@@ -14,7 +21,7 @@ class AccountController {
   };
 
   createAccount = async (request: FastifyRequest, response: FastifyReply) => {
-    const { login, password, name, ownerId } = request.body as { login: string; password: string; name: string, ownerId: number};
+    const { login, password, name, ownerId } = request.body as AccountRequest;
 
     try {
       const account = await this.accountModel.create({ login, password, name, ownerId: Number(ownerId) });

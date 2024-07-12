@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 const cors_1 = __importDefault(require("@fastify/cors")); // Atualize a importação
 const userRoutes_1 = __importDefault(require("./routes/userRoutes"));
 const accountRoutes_1 = __importDefault(require("./routes/accountRoutes"));
+const loginRoutes_1 = __importDefault(require("./routes/loginRoutes"));
 const app = async (fastify) => {
     fastify.register(cors_1.default, {
         origin: '*',
@@ -14,8 +15,9 @@ const app = async (fastify) => {
         credentials: true,
     });
     fastify.get('/', async (request, reply) => {
-        reply.send('Hello World!');
+        reply.send('Welcome to lucopgen API');
     });
+    fastify.register(loginRoutes_1.default, { prefix: '/login' });
     fastify.register(userRoutes_1.default, { prefix: '/users' });
     fastify.register(accountRoutes_1.default, { prefix: '/accounts' });
 };

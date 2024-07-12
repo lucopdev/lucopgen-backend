@@ -9,17 +9,18 @@ class UserModel {
     });
   }
 
-  async create(data: { email: string; password: string; name: string }) {
+  async create(data: { name: string; email: string; phone: string; password: string }) {
     return prisma.user.create({
       data: {
         name: data.name,
         email: data.email,
+        phone: data.phone,
         password: data.password,
       },
     });
   }
 
-  async updateUser(id: number, data: { email: string; password: string; name: string }) {
+  async updateUser(id: number, data: { name: string; phone: string; email: string; password: string }) {
     const user = await prisma.user.findUnique({
       where: {
         id,
@@ -37,6 +38,7 @@ class UserModel {
       data: {
         name: data.name,
         email: data.email,
+        phone: data.phone,
         password: data.password,
       },
     });

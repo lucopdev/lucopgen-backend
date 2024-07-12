@@ -17,7 +17,39 @@ class UserModel {
             data: {
                 name: data.name,
                 email: data.email,
+                phone: data.phone,
                 password: data.password,
+            },
+        });
+    }
+    async updateUser(id, data) {
+        const user = await prisma_1.default.user.findUnique({
+            where: {
+                id,
+            },
+        });
+        if (!user) {
+            throw new Error('User not found');
+        }
+        return prisma_1.default.user.update({
+            where: {
+                id,
+            },
+            data: {
+                name: data.name,
+                email: data.email,
+                phone: data.phone,
+                password: data.password,
+            },
+        });
+    }
+    async deleteUser(id) {
+        return prisma_1.default.user.delete({
+            where: {
+                id,
+            },
+            include: {
+                accounts: true,
             },
         });
     }
