@@ -30,7 +30,9 @@ class LoginController {
       return reply.code(401).send({ message: 'Invalid password' });
     }
 
-    return reply.send({ token: 'token' });
+    const token = JwtUtils.generateJwtToken({ email });
+    const bearerToken = `Bearer ${token}`;
+    return reply.send({ token: bearerToken, type: 'Bearer' });
   };
 }
 
