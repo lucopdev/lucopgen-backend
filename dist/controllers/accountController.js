@@ -29,7 +29,6 @@ class AccountController {
         };
         this.deleteAccount = async (request, response) => {
             const { userId, id } = request.params;
-            console.log(id);
             try {
                 const account = await this.accountModel.findById(Number(id));
                 if (userId !== account?.ownerId.toString()) {
