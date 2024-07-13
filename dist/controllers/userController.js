@@ -21,17 +21,17 @@ class UserController {
                 })));
             }
             catch (error) {
-                response.status(500).send(error);
+                return response.status(500).send(error);
             }
         };
         this.createUser = async (request, response) => {
             const { name, email, phone, password } = request.body;
             try {
                 const user = await this.userModel.create({ name, email, phone, password: jwtUtils_1.default.hashPassword(password) });
-                response.send({ id: user.id, name: user.name, email: user.email });
+                return response.send({ id: user.id, name: user.name, email: user.email });
             }
             catch (error) {
-                response.status(500).send(error);
+                return response.status(500).send(error);
             }
         };
     }

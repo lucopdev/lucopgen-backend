@@ -25,7 +25,7 @@ class UserController {
         }))
       );
     } catch (error) {
-      response.status(500).send(error);
+      return response.status(500).send(error);
     }
   };
 
@@ -34,9 +34,9 @@ class UserController {
 
     try {
       const user = await this.userModel.create({ name, email, phone, password: JwtUtils.hashPassword(password) });
-      response.send({ id: user.id, name: user.name, email: user.email });
+      return response.send({ id: user.id, name: user.name, email: user.email });
     } catch (error) {
-      response.status(500).send(error);
+      return response.status(500).send(error);
     }
   };
 }

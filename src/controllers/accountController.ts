@@ -14,9 +14,9 @@ class AccountController {
   getAccounts = async (request: FastifyRequest, response: FastifyReply) => {
     try {
       const accounts = await this.accountModel.findAll();
-      response.send(accounts);
+      return response.send(accounts);
     } catch (error) {
-      response.status(500).send(error);
+      return response.status(500).send(error);
     }
   };
 
@@ -25,9 +25,26 @@ class AccountController {
 
     try {
       const account = await this.accountModel.create({ login, password, name, ownerId: Number(ownerId) });
-      response.send(account);
+      return response.send(account);
     } catch (error) {
-      response.status(500).send(error);
+      return response.status(500).send(error);
+    }
+  };
+
+  deleteAccount = async (request: FastifyRequest, response: FastifyReply) => {
+    const { userId, id } = request.params as { userId: string; id: string };
+    
+    try {
+      const account = await this.accountModel.findById(Number(id));
+
+      if (userId !== account?.ownerId.toString()) {
+        return response.status(401).send({ message: 'Unauthorized' });
+      }
+
+      await this.accountModel.delete(Number(id));
+      return response.send({ message: 'Account deleted' });
+    } catch (error) {
+      return response.status(500).send(error);
     }
   };
 }
@@ -36,3 +53,4 @@ const accountController = new AccountController();
 
 export const getAccounts = accountController.getAccounts;
 export const createAccount = accountController.createAccount;
+export const deleteAccount = accountController.deleteAccount;

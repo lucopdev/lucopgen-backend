@@ -8,6 +8,13 @@ class AccountModel {
     async findAll() {
         return prisma_1.default.account.findMany();
     }
+    async findById(id) {
+        return prisma_1.default.account.findUnique({
+            where: {
+                id,
+            },
+        });
+    }
     async create(data) {
         return prisma_1.default.account.create({
             data: {
@@ -19,6 +26,13 @@ class AccountModel {
                         id: data.ownerId,
                     },
                 },
+            },
+        });
+    }
+    async delete(id) {
+        return prisma_1.default.account.delete({
+            where: {
+                id,
             },
         });
     }
