@@ -6,6 +6,7 @@ Object.defineProperty(exports, "__esModule", { value: true });
 exports.onLogin = void 0;
 const prisma_1 = __importDefault(require("../prisma"));
 const jwtUtils_1 = __importDefault(require("../utils/jwtUtils"));
+const crypto_1 = __importDefault(require("../utils/crypto"));
 class LoginController {
     constructor() {
         this.onLogin = async (request, reply) => {
@@ -21,7 +22,7 @@ class LoginController {
             if (!user) {
                 return reply.code(404).send({ message: 'User not found' });
             }
-            const isPasswordValid = jwtUtils_1.default.comparePassword(password, user.password);
+            const isPasswordValid = crypto_1.default.comparePassword(password, user.password.split(',')[0], user.password.split(',')[1]);
             if (!isPasswordValid) {
                 return reply.code(401).send({ message: 'Invalid password' });
             }

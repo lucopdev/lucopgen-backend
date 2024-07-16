@@ -4,7 +4,6 @@ var __importDefault = (this && this.__importDefault) || function (mod) {
 };
 Object.defineProperty(exports, "__esModule", { value: true });
 const jsonwebtoken_1 = __importDefault(require("jsonwebtoken"));
-const bcrypt_1 = __importDefault(require("bcrypt"));
 const dotenv_1 = __importDefault(require("dotenv"));
 dotenv_1.default.config();
 class JwtUtils {
@@ -37,13 +36,6 @@ class JwtUtils {
         catch (error) {
             return null;
         }
-    }
-    static hashPassword(password) {
-        const saltRounds = 10;
-        return bcrypt_1.default.hashSync(password, saltRounds);
-    }
-    static comparePassword(password, hash) {
-        return bcrypt_1.default.compareSync(password, hash);
     }
 }
 exports.default = JwtUtils;

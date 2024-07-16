@@ -1,5 +1,4 @@
 import jwt from 'jsonwebtoken';
-import bcrypt from 'bcrypt';
 import dotenv from 'dotenv';
 
 dotenv.config();
@@ -39,15 +38,6 @@ class JwtUtils {
     } catch (error) {
       return null;
     }
-  }
-
-  static hashPassword(password: string) {
-    const saltRounds = 10;
-    return bcrypt.hashSync(password, saltRounds);
-  }
-
-  static comparePassword(password: string, hash: string) {
-    return bcrypt.compareSync(password, hash);
   }
 }
 

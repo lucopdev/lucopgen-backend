@@ -1,6 +1,7 @@
 import { FastifyReply, FastifyRequest } from 'fastify';
 import prisma from '../prisma';
 import JwtUtils from '../utils/jwtUtils';
+import crypto from '../utils/crypto';
 
 interface LoginRequest {
   email: string;
@@ -20,12 +21,12 @@ class LoginController {
         email,
       },
     });
-
     if (!user) {
       return reply.code(404).send({ message: 'User not found' });
     }
+    
+    const isPasswordValid = crypto.comparePassword(password, user.password.split(',')[0], user.password.split(',')[1]);
 
-    const isPasswordValid = JwtUtils.comparePassword(password, user.password);
     if (!isPasswordValid) {
       return reply.code(401).send({ message: 'Invalid password' });
     }
